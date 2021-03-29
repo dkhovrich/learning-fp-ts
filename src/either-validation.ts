@@ -1,6 +1,6 @@
 import {chain, Either, getValidation, left, map, mapLeft, right} from "fp-ts/Either";
 import {pipe} from "fp-ts/pipeable";
-import {getSemigroup, NonEmptyArray} from "fp-ts/NonEmptyArray";
+import {getSemigroup, NonEmptyArray, of} from "fp-ts/NonEmptyArray";
 import {sequenceT} from "fp-ts/Apply";
 
 const minLength = (s: string): Either<string, string> => s.length >= 6 ? right(s) : left("at least 6 characters");
@@ -18,7 +18,7 @@ console.log(validatePassword('Abcdef'));
 const applicativeValidation = getValidation(getSemigroup<string>());
 
 const lift = <E, A>(check: (a: A) => Either<E, A>) => (a: A): Either<NonEmptyArray<E>, A> => {
-    return pipe(check(a), mapLeft(a => [a]));
+    return pipe(check(a), mapLeft(of));
 }
 
 const minLengthV = lift(minLength);
