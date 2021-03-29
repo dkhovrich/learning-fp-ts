@@ -1,15 +1,17 @@
-import {chain, getMonoid, io, IO, map} from "fp-ts/IO";
-import {fromNullable, Option} from "fp-ts/Option";
-import {pipe} from "fp-ts/pipeable";
-import {fold, Monoid, monoidSum} from "fp-ts/Monoid";
-import {randomInt} from "fp-ts/Random";
-import {IOEither, tryCatch} from "fp-ts/IOEither";
+import { chain, getMonoid, io, IO, map } from "fp-ts/IO";
+import { fromNullable, Option } from "fp-ts/Option";
+import { pipe } from "fp-ts/pipeable";
+import { fold, Monoid, monoidSum } from "fp-ts/Monoid";
+import { randomInt } from "fp-ts/Random";
+import { IOEither, tryCatch } from "fp-ts/IOEither";
 
 const storage: Record<string, string> = {};
 
-const getItem = (key: string): IO<Option<string>> => () => fromNullable(storage[key]);
+const getItem = (key: string): IO<Option<string>> => () =>
+    fromNullable(storage[key]);
 
-const setItem = (key: string, value: string): IO<void> => () => storage[key] = value;
+const setItem = (key: string, value: string): IO<void> => () =>
+    (storage[key] = value);
 
 const now: IO<number> = () => new Date().getTime();
 
@@ -19,7 +21,10 @@ const random: IO<number> = () => Math.random();
 
 // const randomBool: IO<boolean> = io.map(random, n => n < 0.5);
 
-const randomBool: IO<boolean> = pipe(random, map(n => n < 0.5));
+const randomBool: IO<boolean> = pipe(
+    random,
+    map((n) => n < 0.5)
+);
 
 // const program: IO<void> = io.chain(randomBool, log);
 
@@ -39,5 +44,5 @@ const dice = [D4, D10, D20];
 
 pipe(
     roll(dice),
-    chain(result => log(`Result is: ${result}`))
+    chain((result) => log(`Result is: ${result}`))
 )();

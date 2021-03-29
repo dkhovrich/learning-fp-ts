@@ -1,5 +1,20 @@
-import {fold, getStructMonoid, monoidAll, monoidAny, monoidProduct, monoidString, monoidSum} from "fp-ts/Monoid";
-import {getApplyMonoid, getFirstMonoid, getLastMonoid, none, Option, some} from "fp-ts/Option";
+import {
+    fold,
+    getStructMonoid,
+    monoidAll,
+    monoidAny,
+    monoidProduct,
+    monoidString,
+    monoidSum
+} from "fp-ts/Monoid";
+import {
+    getApplyMonoid,
+    getFirstMonoid,
+    getLastMonoid,
+    none,
+    Option,
+    some
+} from "fp-ts/Option";
 
 console.log(fold(monoidSum)([1, 2, 3, 4, 5]));
 console.log(fold(monoidProduct)([1, 2, 3, 4, 5]));
@@ -23,9 +38,9 @@ console.log(lastMonoid.concat(some(1), none));
 console.log(lastMonoid.concat(some(1), some(2)));
 
 interface Settings {
-    fontFamily: Option<string>
-    fontSize: Option<number>
-    maxColumn: Option<number>
+    fontFamily: Option<string>;
+    fontSize: Option<number>;
+    maxColumn: Option<number>;
 }
 
 const monoidSettings = getStructMonoid<Settings>({
@@ -35,16 +50,16 @@ const monoidSettings = getStructMonoid<Settings>({
 });
 
 const workspaceSettings: Settings = {
-    fontFamily: some('Courier'),
+    fontFamily: some("Courier"),
     fontSize: none,
     maxColumn: some(80)
-}
+};
 
 const userSettings: Settings = {
-    fontFamily: some('Fira Code'),
+    fontFamily: some("Fira Code"),
     fontSize: some(12),
     maxColumn: none
-}
+};
 
 const settings = monoidSettings.concat(workspaceSettings, userSettings);
 console.log(settings);
