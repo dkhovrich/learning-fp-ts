@@ -1,8 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import * as TE from "fp-ts/TaskEither";
 import { pipe } from "fp-ts/pipeable";
-import { IO } from "fp-ts/IO";
-import { head } from "fp-ts/ReadonlyArray";
 
 const URL = "https://jsonplaceholder.typicode.com/posts";
 
