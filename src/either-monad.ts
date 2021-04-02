@@ -53,3 +53,11 @@ const Monad: Monad2<URI> = {
         }
     }
 };
+
+const r = Monad.chain(right(2), (a) => right(a + 2));
+console.log(r);
+
+const multiply = (a: number) => (b: number): number => a * b;
+
+const r1 = Monad.ap(right(multiply(2)), right(3));
+console.log(r1);
