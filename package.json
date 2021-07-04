@@ -13,6 +13,7 @@
     "axios": "^0.21.0",
     "faker": "^5.5.1",
     "fp-ts": "^2.10.0-rc.8",
+    "monocle-ts": "^2.3.10",
     "typescript": "^4.1.3"
   },
   "devDependencies": {
